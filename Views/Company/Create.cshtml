@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Yeni Şirket Ekle";
+}
+<link rel="stylesheet" href="~/css/company-form.css" asp-append-version="true" />
+
+<div class="company-form-page">
+    <div class="company-form-container">
+        <h2>Yeni Şirket Ekle</h2>
+
+        <form asp-action="Create" method="post">
+            <input type="text" name="company_name" placeholder="Şirket Adı" required />
+            <input type="text" name="address" placeholder="Adres" required />
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-save">Kaydet</button>
+                <a href="@Url.Action("Index", "Company")" class="btn btn-cancel">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>

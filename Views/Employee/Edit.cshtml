@@ -1,0 +1,31 @@
+﻿@model Web_Portal.Models.Employee
+
+@{
+    ViewData["Title"] = "Personel Güncelle";
+}
+
+<div class="container mt-4">
+    <h2>Personel Güncelle</h2>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Employee_ID" />
+
+        <div class="form-group">
+            <label>Ad Soyad</label>
+            <input type="text" asp-for="Full_Name" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" asp-for="Email" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Telefon</label>
+            <input type="text" asp-for="Phone" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Adres</label>
+            <textarea asp-for="Address" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Güncelle</button>
+    </form>
+</div>

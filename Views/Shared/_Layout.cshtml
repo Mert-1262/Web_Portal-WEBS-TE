@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Web Portal</title>
+
+    <!-- CSS Dosyaları -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+    @if (ViewData["Title"] == "Admin Girişi")
+    {
+        <link rel="stylesheet" href="~/css/login.css" />
+    }
+    else if (ViewData["Title"] == "Admin Paneli")
+    {
+        <link rel="stylesheet" href="~/css/site.css" />
+    }
+    else if (ViewData["Title"] == "Şirket Yönetimi")
+    {
+        <link rel="stylesheet" href="~/css/company.css" />
+    }
+    else if (ViewData["Title"] == "Personel Yönetimi")
+    {
+        <link rel="stylesheet" href="~/css/employee.css" />
+
+    }
+    else if (ViewData["Title"] == "Yeni Personel Ekle")
+    {
+        <link rel="stylesheet" href="~/css/employee-form.css" asp-append-version="true" />
+    }
+    else if (ViewData["Title"] == "Personel Güncelle")  // 📌 Güncelleme sayfasına özel
+    {
+        <link rel="stylesheet" href="~/css/employee-update.css" asp-append-version="true" />
+    }
+
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        @if (Context.Session.GetInt32("Admin_ID") != null)
+        {
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <div class="sidebar-logo">
+                        <img src="~/images/sanko-holding.png" alt="Sanko Logo">
+                </div>
+                <div class="sidebar-heading text-white text-center py-3">
+                    <h4>Admin Paneli</h4>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="@Url.Action("Dashboard", "Admin")" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i> Ana Panel
+                        </a>
+                    </li>
+                    <a href="@Url.Action("Index", "Company")" class="nav-link">
+                        <i class="fas fa-building"></i> Şirketler
+                    </a>
+
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Employee")" class="nav-link">
+                            <i class="fas fa-users"></i> Personeller
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="@Url.Action("Logout", "Admin")" class="nav-link logout">
+                            <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                        </a>
+                    </li>
+                   
+                </ul>
+            </div>
+        }
+        <!-- Sayfa İçeriği -->
+        <div id="page-content-wrapper">
+            <div class="container text-center">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+  
+
+
+    <!-- JS Dosyaları -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        var message = '@TempData["Message"]';
+        var messageType = '@TempData["MessageType"]';
+
+        if (message) {
+            if (messageType === "success") {
+                toastr.success(message);
+            } else if (messageType === "error") {
+                toastr.error(message);
+            } else if (messageType === "warning") {
+                toastr.warning(message);
+            } else {
+                toastr.info(message);
+            }
+        }
+    });
+</script>

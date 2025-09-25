@@ -1,0 +1,72 @@
+﻿@model List<Web_Portal.Models.Company>
+
+@{
+    ViewData["Title"] = "Şirket Yönetimi";
+}
+
+
+<form method="get" class="search-form">
+    <div class="search-group">
+        <input type="text" name="searchName" value="@ViewBag.SearchName" placeholder="Şirket Adı" class="form-control" />
+        <input type="text" name="searchAddress" value="@ViewBag.SearchAddress" placeholder="Adres" class="form-control" />
+        <button type="submit" class="btn btn-primary">Ara</button>
+        <a href="@Url.Action("Index", "Company")" class="btn btn-secondary">Temizle</a>
+    </div>
+</form>
+
+
+<div class="company-container">
+    <h3>Şirket Yönetimi</h3>
+
+    <a href="@Url.Action("Create", "Company")" class="btn btn-add-company">+ Yeni Şirket Ekle</a>
+
+    <div class="company-table-wrapper">
+        <table class="company-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Şirket Adı</th>
+                    <th>Adres</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var company in Model)
+                {
+                    <tr>
+                        <td>@company.Company_ID</td>
+                        <td>@company.company_name</td>
+                        <td>@company.address</td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Company", new { id = company.Company_ID })" class="btn btn-edit">Düzenle</a>
+                            <a href="@Url.Action("Delete", "Company", new { id = company.Company_ID })" class="btn btn-delete" onclick="return confirm('Bu şirketi silmek istediğinize emin misiniz?');">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+        <!-- 📌 Sayfalama Butonları -->
+        <div class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })" class="page-btn">« Önceki</a>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <a href="@Url.Action("Index", new { page = i })" class="page-btn @(ViewBag.CurrentPage == i ? "active" : "")">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })" class="page-btn">Sonraki »</a>
+            }
+
+
+
+    </div>
+</div>

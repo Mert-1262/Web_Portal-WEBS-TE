@@ -1,0 +1,97 @@
+﻿/* Sayfa Arkaplanı */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/images/photo.jpg'); /* Arka plan */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Login Kutusu */
+.login-container {
+    background: rgba(255, 255, 255, 0.15); /* Cam efekti */
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 380px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute; /* Konumlandırma için */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Logo */
+.login-logo {
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+/* Başlık */
+.login-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Giriş Kutuları */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+    .input-group input {
+        background: none;
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 16px;
+        color: white;
+        padding: 8px;
+    }
+
+        /* Placeholder rengi daha belirgin */
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: bold;
+        }
+
+/* Giriş Butonu */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: black;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s;
+}
+
+    .login-btn:hover {
+        background: #e0e0e0;
+        transform: scale(1.05);
+    }
+
+/* Mobil Uyum */
+@media (max-width: 768px) {
+    .login-container {
+        width: 90%;
+    }
+}
